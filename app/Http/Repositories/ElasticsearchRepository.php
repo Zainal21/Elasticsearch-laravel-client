@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Models\Article;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Elastic\Elasticsearch\Client;
 use Illuminate\Database\Eloquent\Collection;
