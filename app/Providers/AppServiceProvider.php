@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Elastic\Elasticsearch\Client;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Elastic\Elasticsearch\ClientBuilder;
 use App\Http\Repositories\ArticleRepository;
@@ -17,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if(config('app.env') == 'production') {
+            URL::forceScheme('https');
+        }
+        
         $this->app->bind(ArticleRepository::class, function ($app) {
             if (! config('services.search.enabled')) {
                 return new EloquentRepository();
